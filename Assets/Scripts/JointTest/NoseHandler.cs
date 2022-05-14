@@ -1,34 +1,59 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NoseHandler : MonoBehaviour
 {
+    [SerializeField] float noseFuel;
 
-    Rigidbody noseObject;
+    [SerializeField] GameObject parachute;
+    [SerializeField] ParticleSystem rocketFire;
 
-    [SerializeField] float height;
-    [SerializeField] float maxHeight;
+    [SerializeField] AudioClip rocketSound;
 
-    [SerializeField] Vector3 noseSpeed;
-    [SerializeField] GameObject parachute;    
+    [Header("Thrust values")]
+    [SerializeField] float thrustX = 0f;
+    [SerializeField] float thrustY = 0f;
+    [SerializeField] float thrustZ = 0f;
+
     bool jointDetached = false;
+    bool isFalling = false;
+    bool noseFly = false;
+    Rigidbody noseRgBody;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        noseObject = GetComponent<Rigidbody>();
+        noseRgBody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        noseSpeed = noseObject.velocity;
-        height = transform.position.y;
-
-        if (noseObject.velocity.y < 0 && jointDetached)
+        if (jointDetached)
         {
-            // get max height       
+            if (noseFuel > 0 && noseFly)
+            {
+                noseRgBody.AddRelativeForce(new Vector3(thrustX, thrustY, thrustZ));
+                noseFuel -= Time.deltaTime;
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(rocketSound);
+                }
+            }
+            else if (noseFuel < 0 && noseFly)
+            {
+                rocketFire.Stop();
+                audioSource.Stop();
+            }
+
+        }
+
+        if (noseRgBody.velocity.y < 0 && jointDetached && noseFuel < 0)
+        {
             parachute.SetActive(true);
         }
     }
@@ -37,5 +62,33 @@ public class NoseHandler : MonoBehaviour
     {
         jointDetached = true;
         gameObject.GetComponent<Rigidbody>().mass = 1;
+        // start fly by himself after short time
+        StartCoroutine(StartThrust());
+    }
+
+    private IEnumerator StartThrust()
+    {
+        yield return new WaitForSeconds(1.5f);
+        RocketThrust();
+    }
+
+    public void RocketThrust()
+    {
+        rocketFire.Play();
+        isFalling = false;
+        noseFly = true;
+    }
+
+    public void NoseData(float fuel, Vector3 thrust)
+    {
+        this.noseFuel = fuel;
+        thrustX = thrust.x;
+        thrustZ = thrust.y;
+        thrustY = thrust.z * (-1);
+    }
+
+    public float Fuel()
+    {
+        return noseFuel;
     }
 }

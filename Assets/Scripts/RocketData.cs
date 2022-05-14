@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 
@@ -7,45 +8,125 @@ public class RocketData : MonoBehaviour
 {
 
     [SerializeField] GameObject noseRocket;
-    [SerializeField] GameObject rocket;
-    [SerializeField] Vector3 startThrust;
-    [SerializeField] TextMeshProUGUI speedText, maxHeightText, heightText, fuelText;
+    [SerializeField] FirstStageHandler firstStage;
+    [SerializeField] GameObject rocketPrefab;
+    [SerializeField] Vector3 rocketStartPosition;
+    //[SerializeField] CinemachineVirtualCamera rocketCamera;
+    [SerializeField] CinemachineFreeLook rocketCamera;
+    [SerializeField] UiHandler uiHandler;
+    [SerializeField] Transform launchPlatform;
+    [SerializeField] WindHandler windHandler;
 
-    Rigidbody noseBody;
+    [Header("Start Values")]
+    [SerializeField] Vector3 firstStageStartThrust;
+    [SerializeField] Vector3 noseStartThrust;
+    [SerializeField] float noseFuelStart;
+    [SerializeField] float firstStageFuelStart;
+
+    Rigidbody noseRgBody;
+    GameObject instantiatedRocket;
     float height, maxHeight = 0;
     Vector3 speed;
+    bool launched = false;
 
     private void Start()
     {
-        if (noseRocket == null)
+        if (windHandler == null)
         {
-            noseRocket = FindObjectOfType<NoseHandler>().gameObject;
-
+            windHandler = FindObjectOfType<WindHandler>();
         }
-        noseBody = noseRocket.GetComponent<Rigidbody>();
+        if (uiHandler == null)
+        {
+            uiHandler = FindObjectOfType<UiHandler>();
+            uiHandler.StartInputValues(firstStageStartThrust, noseStartThrust, firstStageFuelStart, noseFuelStart);
+        }
+        if (instantiatedRocket == null)
+        {
+            GetRocketBodie();
+        }
+        rocketStartPosition = new Vector3(
+            instantiatedRocket.transform.position.x,
+            instantiatedRocket.transform.position.y,
+            instantiatedRocket.transform.position.z);
 
     }
 
     private void Update()
     {
-        // rodar condição se foi lançado
-        speed = noseBody.velocity;
-        speedText.text = $"Velocidade: x:{(int)speed.x},y:{(int)speed.y},z:{(int)speed.z}";
-
-        height = noseRocket.transform.position.y;
-        heightText.text = $"Altura: {(int)height}";
-        if (height > maxHeight)
+        if (instantiatedRocket != null)
         {
-            maxHeight = height;
-            maxHeightText.text = $"Altura Máxima: {(int)height}";
+            speed = noseRgBody.velocity;
+            uiHandler.SpeedText(speed);
+
+            height = noseRocket.transform.position.y - launchPlatform.position.y;
+            uiHandler.HeightText(height);
+
+            if (height > maxHeight)
+            {
+                maxHeight = height;
+                uiHandler.MaxHeight(height);
+            }
         }
+        // change fuel text to nose, or have one for first stage and other for nose
+        uiHandler.FirstStageFuelText(firstStage.Fuel());
+        uiHandler.NoseFuelText(noseRocket.GetComponent<NoseHandler>().Fuel());
+    }
+
+    private void GetRocketBodie()
+    {
+        // get rocket parent
+        instantiatedRocket = FindObjectOfType<RocketParent>().gameObject;
+        // get nose body and rigid body
+        noseRocket = instantiatedRocket.GetComponentInChildren<NoseHandler>().gameObject;
+        noseRgBody = noseRocket.GetComponent<Rigidbody>();
+        // get first stage body
+        firstStage = instantiatedRocket.GetComponentInChildren<FirstStageHandler>();
+        // assing new rocket to wind
+        windHandler.RecatchRocketBodies();
+        FollowNose();
     }
 
     public void ResetData()
     {
         // reset data
-        // delete rocket
-        // instantiate new rocket (prefab)
+        maxHeight = 0;
+        launched = false;
+
+        // destroy old
+        instantiatedRocket = null;
+        Destroy(FindObjectOfType<RocketParent>().gameObject);
+        // create new
+        Instantiate(rocketPrefab, rocketStartPosition, Quaternion.identity);
+        GetRocketBodie();
+
+        rocketCamera.Follow = noseRocket.transform;
+
+    }
+
+    public void LaunchRocket()
+    {
+        if (launched == false)
+        {
+            // send input data to nose
+            noseRocket.GetComponent<NoseHandler>().NoseData(uiHandler.NoseFuel(), uiHandler.NoseInputThrust());
+            // send input data to 1st stage and launch            
+            firstStage.Launch(uiHandler.FirstStageFuel(), uiHandler.FirstStageInputThrust());
+
+            // "lock" launch button
+            launched = true;
+        }
+    }
+
+    public void FollowNose()
+    {
+        rocketCamera.Follow = noseRocket.transform;
+        rocketCamera.LookAt = noseRocket.transform;
+    }
+
+    public void FollowFirstStage()
+    {
+        rocketCamera.Follow = firstStage.transform;
+        rocketCamera.LookAt = firstStage.transform;
     }
 
 
