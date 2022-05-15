@@ -46,11 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noseRocket: {fileID: 0}
   firstStage: {fileID: 0}
-  rocketPrefab: {fileID: 179017190927093491, guid: 81b2ec7093bf05a4888a32687b216f34, type: 3}
+  rocketPrefab: {fileID: 2778561243072575387, guid: 964c08b3e3f0a554da6c003c5d6830dd, type: 3}
   rocketStartPosition: {x: 0, y: 0, z: 0}
   rocketCamera: {fileID: 0}
   uiHandler: {fileID: 0}
   launchPlatform: {fileID: 0}
+  windHandler: {fileID: 0}
   firstStageStartThrust: {x: 0, y: 10, z: 0}
   noseStartThrust: {x: 0, y: 5, z: 0}
   noseFuelStart: 5

@@ -17,8 +17,7 @@ public class NoseHandler : MonoBehaviour
     [SerializeField] float thrustY = 0f;
     [SerializeField] float thrustZ = 0f;
 
-    bool jointDetached = false;
-    bool isFalling = false;
+    bool jointDetached = false;    
     bool noseFly = false;
     Rigidbody noseRgBody;
     AudioSource audioSource;
@@ -37,7 +36,7 @@ public class NoseHandler : MonoBehaviour
         {
             if (noseFuel > 0 && noseFly)
             {
-                noseRgBody.AddRelativeForce(new Vector3(thrustX, thrustY, thrustZ));
+                noseRgBody.AddRelativeForce(new Vector3(thrustX / 10, thrustY / 10, thrustZ));
                 noseFuel -= Time.deltaTime;
                 if (!audioSource.isPlaying)
                 {
@@ -53,15 +52,14 @@ public class NoseHandler : MonoBehaviour
         }
 
         if (noseRgBody.velocity.y < 0 && jointDetached && noseFuel < 0)
-        {
-            parachute.SetActive(true);
+        {            
+            parachute.GetComponent<Parachute>().OpenParachute();
         }
     }
 
     public void JointDetached()
     {
-        jointDetached = true;
-        gameObject.GetComponent<Rigidbody>().mass = 1;
+        jointDetached = true;        
         // start fly by himself after short time
         StartCoroutine(StartThrust());
     }
@@ -74,8 +72,7 @@ public class NoseHandler : MonoBehaviour
 
     public void RocketThrust()
     {
-        rocketFire.Play();
-        isFalling = false;
+        rocketFire.Play();        
         noseFly = true;
     }
 

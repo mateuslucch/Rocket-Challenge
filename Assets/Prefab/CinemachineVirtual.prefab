@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 3975731119077226552}
   - component: {fileID: 3975731119077226555}
   m_Layer: 0
-  m_Name: Cinemachine
+  m_Name: CinemachineVirtual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

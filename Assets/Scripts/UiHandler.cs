@@ -8,7 +8,7 @@ public class UiHandler : MonoBehaviour
     [Header("Updated Text Box")]
     [SerializeField] TextMeshProUGUI speedText, maxHeightText, heightText, firstStageFuelText, noseFuelText;
 
-    [Header("Data Input Box")]
+    [Header("Data Rocket Input Box")]
     [SerializeField] TMP_InputField firstStageFuelInput;
     [SerializeField] TMP_InputField noseFuelInput;
 
@@ -23,14 +23,21 @@ public class UiHandler : MonoBehaviour
     [Header("Rocket Controller Object")]
     [SerializeField] RocketData rocketData;
 
-    Vector3 speed;
+    [Header("Wind Handler")]
+    [SerializeField] WindHandler windHandler;
+    [SerializeField] TMP_InputField windXDirection;
+    [SerializeField] TMP_InputField windZDirection;
 
     private void Start()
     {
-        if (rocketData == null)
-        {
-            rocketData = FindObjectOfType<RocketData>();
-        }
+        if (rocketData == null) { rocketData = FindObjectOfType<RocketData>(); }
+        if (windHandler == null) { windHandler = FindObjectOfType<WindHandler>(); }
+
+        windXDirection.text = "0";
+        windZDirection.text = "0";
+        windXDirection.onValueChanged.AddListener(delegate { ChangeWindDirection(); });
+        windZDirection.onValueChanged.AddListener(delegate { ChangeWindDirection(); });
+       
     }
 
     // text update
@@ -57,29 +64,16 @@ public class UiHandler : MonoBehaviour
     public void NoseFuelText(float fuel)
     {
         noseFuelText.text = $"Nariz: {(int)fuel}";
-
     }
 
     // buttons
-    public void LaunchRocket()
-    {
-        rocketData.LaunchRocket();
-    }
+    public void LaunchRocket() { rocketData.LaunchRocket(); }
 
-    public void ResetData()
-    {
-        rocketData.ResetData();
-    }
+    public void ResetData() { rocketData.ResetData(); }
 
-    public void NoseCamera()
-    {
-        rocketData.FollowNose();
-    }
+    public void NoseCamera() { rocketData.FollowNose(); }
 
-    public void FirstStageCamera()
-    {
-        rocketData.FollowFirstStage();
-    }
+    public void FirstStageCamera() { rocketData.FollowFirstStage(); }
 
     // input start values
     public void StartInputValues(Vector3 firstStageThrustStart, Vector3 noseThrustStart, float firstStageFuelStart, float noseFuelStart)
@@ -96,15 +90,9 @@ public class UiHandler : MonoBehaviour
     }
 
     // input return
-    public int FirstStageFuel()
-    {
-        return int.Parse(firstStageFuelInput.text);
-    }
+    public int FirstStageFuel() { return int.Parse(firstStageFuelInput.text); }
 
-    public int NoseFuel()
-    {
-        return int.Parse(noseFuelInput.text);
-    }
+    public int NoseFuel() { return int.Parse(noseFuelInput.text); }
 
     public Vector3 FirstStageInputThrust()
     {
@@ -122,5 +110,10 @@ public class UiHandler : MonoBehaviour
             int.Parse(noseYThrustInput.text),
             int.Parse(noseZThrustInput.text));
         return rocketThrust;
+    }
+
+    private void ChangeWindDirection()
+    {
+        windHandler.WindValuesChange(int.Parse(windXDirection.text), int.Parse(windZDirection.text));
     }
 }

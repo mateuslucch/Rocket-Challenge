@@ -5,11 +5,34 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera rocketCamera;
-    Camera mainCamera;
-    
+    [SerializeField] CinemachineFreeLook rocketCamera;
+    [SerializeField] float rotateFactor = 0.1f;
+    bool isPressed;
+    int direction;
 
-    private void Update() {
-        transform.Translate(Vector3.right * Time.deltaTime);
+    private void Start()
+    {
+        if (rocketCamera == null)
+        {
+            rocketCamera = FindObjectOfType<CinemachineFreeLook>();
+        }
+    }
+
+    public void Update()
+    {
+        if (isPressed)
+        {
+            rocketCamera.m_XAxis.Value += direction * rotateFactor;
+        }
+    }
+
+    public void OnPointerDown(int direction)
+    {
+        this.direction = direction;
+        isPressed = true;
+    }
+    public void OnPointerUp()
+    {
+        isPressed = false;
     }
 }

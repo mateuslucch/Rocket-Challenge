@@ -50,8 +50,7 @@ public class FirstStageHandler : MonoBehaviour
             {
                 fuel = 0;
                 audioSource.Stop();
-                rocketFire.Stop();
-                firstStageRgBody.AddForce(-transform.up * 10);
+                rocketFire.Stop();                
                 nose.GetComponent<NoseHandler>().JointDetached();
                 Destroy(firstStageRgBody.GetComponent<FixedJoint>());
                 GetComponent<Rigidbody>().drag = 0.5f;

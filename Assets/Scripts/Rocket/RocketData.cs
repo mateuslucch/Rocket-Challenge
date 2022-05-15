@@ -7,8 +7,8 @@ using UnityEngine;
 public class RocketData : MonoBehaviour
 {
 
-    [SerializeField] GameObject noseRocket;
-    [SerializeField] FirstStageHandler firstStage;
+    GameObject noseRocket;
+    FirstStageHandler firstStage;
     [SerializeField] GameObject rocketPrefab;
     [SerializeField] Vector3 rocketStartPosition;
     //[SerializeField] CinemachineVirtualCamera rocketCamera;
@@ -41,7 +41,7 @@ public class RocketData : MonoBehaviour
             uiHandler.StartInputValues(firstStageStartThrust, noseStartThrust, firstStageFuelStart, noseFuelStart);
         }
         if (instantiatedRocket == null)
-        {
+        {            
             GetRocketBodie();
         }
         rocketStartPosition = new Vector3(
@@ -70,11 +70,27 @@ public class RocketData : MonoBehaviour
         // change fuel text to nose, or have one for first stage and other for nose
         uiHandler.FirstStageFuelText(firstStage.Fuel());
         uiHandler.NoseFuelText(noseRocket.GetComponent<NoseHandler>().Fuel());
+    }   
+
+    public void ResetData()
+    {
+        // reset data
+        maxHeight = 0;
+        launched = false;
+
+        // destroy old        
+        Destroy(FindObjectOfType<RocketParent>().gameObject);
+
+        // create new
+        Instantiate(rocketPrefab, rocketStartPosition, Quaternion.identity);        
+        GetRocketBodie();
+
+        rocketCamera.Follow = noseRocket.transform;
+
     }
 
     private void GetRocketBodie()
     {
-        // get rocket parent
         instantiatedRocket = FindObjectOfType<RocketParent>().gameObject;
         // get nose body and rigid body
         noseRocket = instantiatedRocket.GetComponentInChildren<NoseHandler>().gameObject;
@@ -84,23 +100,6 @@ public class RocketData : MonoBehaviour
         // assing new rocket to wind
         windHandler.RecatchRocketBodies();
         FollowNose();
-    }
-
-    public void ResetData()
-    {
-        // reset data
-        maxHeight = 0;
-        launched = false;
-
-        // destroy old
-        instantiatedRocket = null;
-        Destroy(FindObjectOfType<RocketParent>().gameObject);
-        // create new
-        Instantiate(rocketPrefab, rocketStartPosition, Quaternion.identity);
-        GetRocketBodie();
-
-        rocketCamera.Follow = noseRocket.transform;
-
     }
 
     public void LaunchRocket()
@@ -128,6 +127,4 @@ public class RocketData : MonoBehaviour
         rocketCamera.Follow = firstStage.transform;
         rocketCamera.LookAt = firstStage.transform;
     }
-
-
 }
