@@ -26,8 +26,9 @@ public class Parachute : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
         {
+            Debug.Log("Touchdown!!");
             isOnGround = true;
         }
     }

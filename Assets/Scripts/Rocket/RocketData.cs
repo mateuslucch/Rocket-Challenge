@@ -119,7 +119,7 @@ public class RocketData : MonoBehaviour
     public void FollowNose()
     {
         rocketCamera.Follow = noseRocket.transform;
-        rocketCamera.LookAt = noseRocket.transform;
+        rocketCamera.LookAt = noseRocket.transform;        
     }
 
     public void FollowFirstStage()
