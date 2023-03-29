@@ -200,7 +200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84657245}
-  m_LocalRotation: {x: 0.050286572, y: -0.064200945, z: 0.0032392503, w: 0.996664}
+  m_LocalRotation: {x: 0.05028657, y: -0.064200945, z: 0.0032392517, w: 0.9966639}
   m_LocalPosition: {x: 0, y: 24.15, z: -25.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -265,6 +265,58 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1565973904}
+    - target: {fileID: 2028835130740307317, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: "1\xBA Stage"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143946368693322128, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Fuel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684046328679247461, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Nose
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875473943745348515, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: 'Thrust Z:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061315032329783100, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: 'Nose: 00'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927971468217945409, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Nose
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927971468277231553, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: "1\xBA Stage: 00"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927971468433356920, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Launch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927971468706121213, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: 'Max Height: 000000'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927971468708346308, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Reset
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927971469233323568, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: First Stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927971469900854843, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: 'Speed: x:-00, y:-00 z:-00'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927971469901293439, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: 'Height: 00000'
+      objectReference: {fileID: 0}
     - target: {fileID: 5927971470287797636, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -353,6 +405,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6126220275743639599, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: 'Thrust X:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638577404844534766, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: "1\xBA Stage"
+      objectReference: {fileID: 0}
     - target: {fileID: 7114181064601548162, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
       propertyPath: windXDirection
       value: 
@@ -361,6 +421,36 @@ PrefabInstance:
       propertyPath: windZDirection
       value: 
       objectReference: {fileID: 911762861}
+    - target: {fileID: 7217338201568659016, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: 'Z Direction
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737440671280225418, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: X Direction
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769596459939862426, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Thrust
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901581429616344580, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Wind
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911360588934640347, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Nose
+      objectReference: {fileID: 0}
+    - target: {fileID: 8366946839288289791, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: 'Thrust Y:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053216301422841492, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
+      propertyPath: m_text
+      value: Fuel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48df650a0397353478dfaa4e4398023f, type: 3}
 --- !u!1 &251337463
@@ -416,7 +506,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771837, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -494,7 +584,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771837, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1004,6 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
@@ -1020,6 +1111,7 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!4 &888153501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2778561243072801727, guid: 964c08b3e3f0a554da6c003c5d6830dd, type: 3}
@@ -1720,7 +1812,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771837, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1879,7 +1971,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771837, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

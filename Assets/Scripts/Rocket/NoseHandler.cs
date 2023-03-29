@@ -61,10 +61,10 @@ public class NoseHandler : MonoBehaviour
     {
         jointDetached = true;        
         // start fly by himself after short time
-        StartCoroutine(StartThrust());
+        StartCoroutine(StartSecondStageThrust());
     }
 
-    private IEnumerator StartThrust()
+    private IEnumerator StartSecondStageThrust()
     {
         yield return new WaitForSeconds(1.5f);
         RocketThrust();

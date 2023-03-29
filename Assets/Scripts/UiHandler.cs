@@ -37,36 +37,37 @@ public class UiHandler : MonoBehaviour
         windZDirection.text = "0";
         windXDirection.onValueChanged.AddListener(delegate { ChangeWindDirection(); });
         windZDirection.onValueChanged.AddListener(delegate { ChangeWindDirection(); });
-       
+
     }
 
-    // text update
+    #region Text Update
     public void SpeedText(Vector3 speed)
     {
-        speedText.text = $"Velocidade: x:{(int)speed.x},y:{(int)speed.y},z:{(int)speed.z}";
+        speedText.text = $"Speed: x:{(int)speed.x},y:{(int)speed.y},z:{(int)speed.z}";
     }
 
-    public void MaxHeight(float maxHeight)
+    public void MaxHeightText(float maxHeight)
     {
-        maxHeightText.text = $"Altura Máxima: {maxHeight.ToString("F2")}";
+        maxHeightText.text = $"Max Height: {maxHeight.ToString("F2")}";
     }
 
     public void HeightText(float height)
     {
-        heightText.text = $"Altura: {height.ToString("F2")}";
+        heightText.text = $"Height: {height.ToString("F2")}";
     }
 
     public void FirstStageFuelText(float fuel)
     {
-        firstStageFuelText.text = $"1º Estágio: {(int)fuel}";
+        firstStageFuelText.text = $"1º Stage: {(int)fuel}";
     }
 
     public void NoseFuelText(float fuel)
     {
-        noseFuelText.text = $"Nariz: {(int)fuel}";
+        noseFuelText.text = $"Nose: {(int)fuel}";
     }
+    #endregion
 
-    // buttons
+    #region Buttons Methods
     public void LaunchRocket() { rocketData.LaunchRocket(); }
 
     public void ResetData() { rocketData.ResetData(); }
@@ -74,8 +75,9 @@ public class UiHandler : MonoBehaviour
     public void NoseCamera() { rocketData.FollowNose(); }
 
     public void FirstStageCamera() { rocketData.FollowFirstStage(); }
+    #endregion
 
-    // input start values
+    #region Input Values
     public void StartInputValues(Vector3 firstStageThrustStart, Vector3 noseThrustStart, float firstStageFuelStart, float noseFuelStart)
     {
         firstStageFuelInput.text = firstStageFuelStart.ToString();
@@ -88,8 +90,9 @@ public class UiHandler : MonoBehaviour
         noseYThrustInput.text = noseThrustStart.y.ToString();
         noseZThrustInput.text = noseThrustStart.z.ToString();
     }
+    #endregion
 
-    // input return
+    #region  Return Values
     public int FirstStageFuel() { return int.Parse(firstStageFuelInput.text); }
 
     public int NoseFuel() { return int.Parse(noseFuelInput.text); }
@@ -111,6 +114,7 @@ public class UiHandler : MonoBehaviour
             int.Parse(noseZThrustInput.text));
         return rocketThrust;
     }
+    #endregion
 
     private void ChangeWindDirection()
     {

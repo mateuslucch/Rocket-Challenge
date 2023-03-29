@@ -64,7 +64,7 @@ public class RocketData : MonoBehaviour
             if (height > maxHeight)
             {
                 maxHeight = height;
-                uiHandler.MaxHeight(height);
+                uiHandler.MaxHeightText(height);
             }
         }
         // change fuel text to nose, or have one for first stage and other for nose
